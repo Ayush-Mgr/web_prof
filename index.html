@@ -44,6 +44,11 @@
       /* Centers the whole page */
     }
 
+    a {
+      display: inline-flex;
+      align-items: center;
+    }
+
     /* 3. TYPOGRAPHY */
     h1 {
       font-weight: 600;
@@ -262,7 +267,7 @@
 
     .proj-header {
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: space-between;
       gap: 10px;
     }
@@ -271,6 +276,14 @@
       object-fit: cover;
       width: 100%;
       height: 100%;
+      display: block;
+
+    }
+
+    .proj-img-wrapper {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -288,10 +301,18 @@
         </p>
         <p class="exp-title2"> I enjoy building NLP models and automating the web.</p>
         <div class="icon-tab">
-          <button class="button"> Resume <img class="icon" src="assets/Dow_file.png" alt="Ayush Thapa"></button>
-          <img class="icon" src="assets/Linkedin.png" alt="Ayush Thapa">
-          <img class="icon" src="assets/Github.png" alt="Ayush Thapa">
-          <img class="icon" src="assets/Mail.png" alt="Ayush Thapa">
+          <a href="assets/AYUSH_Resume.pdf" target="_blank" style="text-decoration: none;">
+            <button class="button"> Resume <img class="icon" src="assets/Dow_file.png" alt="Download Resume"></button>
+          </a>
+          <a href="https://www.linkedin.com/in/ayush-mgr">
+            <img class="icon" src="assets/Linkedin.png" alt="LinkedIn">
+          </a>
+          <a href="https://github.com/ayush-mgr">
+            <img class="icon" src="assets/Github.png" alt="GitHub">
+          </a>
+          <a href="mailto: thapaayush475@gmail.com">
+            <img class="icon" src="assets/Mail.png" alt="Email">
+          </a>
         </div>
 
 
@@ -316,7 +337,7 @@
               <img src="assets/BlueMinch.png" alt="Ayush Thapa">
             </div>
             <li>
-              <span class="project-title">SEO Specialist Intern</span> @ Blue Minch
+              <a href="https://blueminch.com/"><span class="project-title">SEO Specialist Intern</span></a> @ Blue Minch
               <span class="date">Feb 2026 — Present</span>
               <p>Applied data-driven SEO strategies by analyzing traffic, user behavior, and keyword performance using
                 Google Analytics and Google Search Console. Performed on-page and off-page optimization, implemented
@@ -334,7 +355,8 @@
           <div class="exp-container">
             <div class="exp-image"><img src="assets/college-logo.png" alt="Inspiria"></div>
             <li>
-              <span class="project-title">B.Sc. Data Science</span> @ Inspiria Knowledge Campus
+              <a href="https://inspiria.edu.in/"><span class="project-title">B.Sc. Data Science</span></a> @ Inspiria
+              Knowledge Campus
               <span class="date">2023 — 2026</span>
               <p>Studying Neural Networks, NLP, and Statistical Modeling in Siliguri.</p>
             </li>
@@ -342,7 +364,7 @@
           <div class="exp-container">
             <div class="exp-image"><img src="assets/APS.png" alt="Army Public School"></div>
             <li>
-              <span class="project-title">H.S.</span> @ Army Public School
+              <a href="https://apssukna.com"><span class="project-title">H.S.</span></a> @ Army Public School
               <span class="date">2019— 2022</span>
 
             </li>
@@ -379,13 +401,23 @@
 
       <div class="proj-header">
         <div class="proj-box">
-          <img class="proj-img" src="assets/Kendric.png" alt="Ayush Thapa">
-          <p class="project-title">Goldfish Lemmar</p>
+          <div class="proj-img-wrapper">
+            <a href="https://www.kaggle.com/code/ayushthapamangar/kendric-languagemodel-n-gram"><img class="proj-img"
+                src="assets/Kendric.png" alt="Ayush Thapa"></a>
+          </div>
+          <a href="https://www.kaggle.com/code/ayushthapamangar/kendric-languagemodel-n-gram">
+            <p class="project-title">Goldfish Lemmar</p>
+          </a>
           <p class="date">NLP Chatbot trained on lyrics ( primitive LLM ).</p>
         </div>
         <div class="proj-box">
-          <img class="proj-img" src="assets/Football_pred.png" alt="Ayush Thapa">
-          <p class="project-title">Football Prediction</p>
+          <div class="proj-img-wrapper">
+            <a href="https://github.com/Ayush-Mgr/Football-Prediction"><img class="proj-img"
+                src="assets/Football_pred.png" alt="Ayush Thapa"></a>
+          </div>
+          <a href="https://github.com/Ayush-Mgr/Football-Prediction">
+            <p class="project-title">Football Prediction</p>
+          </a>
           <p class="date">Spanish Football league La Liga prediction using Python using the machine learning method
             random forest.</p>
         </div>
