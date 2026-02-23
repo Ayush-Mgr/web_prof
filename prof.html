@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Data Science & SEO</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* 1. BASIC STYLING (The 'Paint') */
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fafafa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 2. ADAPTIVE CONTAINER (The 'Walls') */
+    .container {
+      max-width: 650px;
+      /* Keeps text readable on big screens */
+      width: 90%;
+      /* Shrinks perfectly for mobile */
+      margin: 50px auto;
+      /* Centers the whole page */
+    }
+
+    /* 3. TYPOGRAPHY */
+    h1 {
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    /* 4. LISTS & LINKS */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    .date {
+      color: #888;
+      font-size: 0.9rem;
+      display: block;
+    }
+
+    .project-title {
+      font-weight: 600;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .exp-title2 {
+
+      text-decoration: none;
+      margin-bottom: 0px;
+      /* Shrinks the gap below every paragraph */
+      margin-top: 0;
+
+    }
+
+    .project-title:hover {
+      text-decoration: underline;
+    }
+
+    /* 5. BADGES (For your Skills) */
+    .badge {
+      background: #eee;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-right: 5px;
+    }
+
+    .header-container {
+      display: flex;
+      /* Turns on the "Side-by-Side" mode */
+      align-items: center;
+      /* Centers the text and image vertically */
+      justify-content: space-between;
+      /* Pushes text to left and image to right */
+      gap: 20px;
+      /* Adds a small gap between them */
+    }
+
+    .header-text {
+      flex: 2;
+      /* Takes up 2 parts of the space */
+    }
+
+    .header-image {
+      flex: 1;
+      /* Takes up 1 part of the space (image stays smaller) */
+      text-align: right;
+      /* Ensures image stays on the far right */
+    }
+
+
+    .header-image img {
+      width: 150px;
+      /* Set a specific size */
+      height: 150px;
+      border-radius: 15%;
+      /* Makes the image a circle */
+      object-fit: cover;
+      /* Prevents the image from stretching */
+    }
+
+    .exp-container {
+      display: flex;
+      /* Turns on the "Side-by-Side" mode */
+      align-items: flex-start;
+      /* Aligns items to the top (image aligns with title) */
+      justify-content: flex-start;
+      /* Keeps them close together */
+      gap: 15px;
+      /* Adds a small gap between them */
+    }
+
+    .exp-image img {
+      width: 45px;
+      /* Set a specific size */
+      height: 45px;
+      border-radius: 15%;
+      /* Makes the image a circle */
+      object-fit: contain;
+      /* Prevents the image from stretching */
+      margin-top: 5px;
+      /* Optional: fine-tune vertical alignment with text if needed */
+    }
+
+    .exp-box {
+      position: relative;
+      /* This is the "Anchor" for our line */
+      padding-left: 20px;
+      /* Make room for the line */
+      border: none;
+    }
+
+    .icon-tab {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+
+    }
+
+    .icon {
+      width: 20px;
+      height: 25 px;
+      border-radius: 0%;
+      object-fit: contain;
+      padding-left: 5px;
+
+    }
+
+    .button {
+      display: flex;
+      width: 100px;
+      height: 30px;
+      border-radius: 5px;
+      border: 1.5px solid #000000;
+      background-color: #fafafa;
+      font-size: 1rem;
+      align-items: center;
+      font-weight: 600;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    .tab-header {
+      margin-top: 10px;
+      display: flex;
+      align-items: stretch;
+      /* Important */
+      height: 40px;
+      /* Set exact height */
+      border: 1px solid #ddd;
+      /* Same border thickness */
+      box-sizing: border-box;
+    }
+
+    .tab-btn {
+      flex: 1;
+      border: none;
+      background: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #888;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .tab-btn.active {
+      color: #000;
+      border: 2px solid #000;
+      /* Same thickness as parent */
+      margin: -2px;
+      /* Cancels double border effect */
+      border-radius: 6px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .proj-box {
+      display: flex;
+      height: 300px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      flex: 1;
+    }
+
+
+    .proj-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .proj-img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <header class="header-container">
+      <div class="header-text">
+        <h1>Hi, I'm Ayush Thapa. 👋</h1>
+
+        <p class="exp-title2"> based in Siliguri.</p>
+        <p class="exp-title2"> 3rd Year <strong>Data Science Student</strong> &
+          <strong>SEO Specialist</strong>
+        </p>
+        <p class="exp-title2"> I enjoy building NLP models and automating the web.</p>
+        <div class="icon-tab">
+          <button class="button"> Resume <img class="icon" src="assets/Dow_file.png" alt="Ayush Thapa"></button>
+          <img class="icon" src="assets/Linkedin.png" alt="Ayush Thapa">
+          <img class="icon" src="assets/Github.png" alt="Ayush Thapa">
+          <img class="icon" src="assets/Mail.png" alt="Ayush Thapa">
+        </div>
+
+
+
+
+      </div>
+      <div class="header-image">
+        <img src="/Volumes/disk_2/program/web_prof/assets/image.png" alt="Ayush Thapa">
+      </div>
+    </header>
+
+    <section>
+      <div class="tab-header">
+        <button class="tab-btn active" onclick="openTab(event, 'work')">Work</button>
+        <button class="tab-btn" onclick="openTab(event, 'education')">Education</button>
+
+      </div>
+      <div id="work" class="tab-content active">
+        <ul class="exp-box">
+          <div class="exp-container">
+            <div class="exp-image">
+              <img src="/Volumes/disk_2/program/web_prof/assets/BlueMinch.png" alt="Ayush Thapa">
+            </div>
+            <li>
+              <span class="project-title">SEO Specialist Intern</span> @ Blue Minch
+              <span class="date">Feb 2026 — Present</span>
+              <p>Applied data-driven SEO strategies by analyzing traffic, user behavior, and keyword performance using
+                Google Analytics and Google Search Console. Performed on-page and off-page optimization, implemented
+                technical fixes using HTML, and built structured SEO reports to track KPIs, identify trends, and support
+                decision-making. Focused on translating search data into measurable growth insights.
+              </p>
+            </li>
+
+          </div>
+        </ul>
+      </div>
+
+      <div id="education" class="tab-content">
+        <ul class="exp-box">
+          <div class="exp-container">
+            <div class="exp-image"><img src="assets/college-logo.png" alt="Inspiria"></div>
+            <li>
+              <span class="project-title">B.Sc. Data Science</span> @ Inspiria Knowledge Campus
+              <span class="date">2023 — 2026</span>
+              <p>Studying Neural Networks, NLP, and Statistical Modeling in Siliguri.</p>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <script>
+        function openTab(evt, tabName) {
+          // 1. Hide all tab content
+          var content = document.getElementsByClassName("tab-content");
+          for (var i = 0; i < content.length; i++) {
+            content[i].classList.remove("active");
+          }
+
+          // 2. Remove "active" class from all buttons
+          var buttons = document.getElementsByClassName("tab-btn");
+          for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("active");
+          }
+
+          // 3. Show the specific tab and mark the button as active
+          document.getElementById(tabName).classList.add("active");
+          evt.currentTarget.classList.add("active");
+        }
+      </script>
+
+    </section>
+
+    <section>
+      <h2>projects</h2>
+
+      <div class="proj-header">
+        <div class="proj-box">
+          <img class="proj-img" src="/Volumes/disk_2/program/web_prof/assets/Kendric.png" alt="Ayush Thapa">
+          <p class="project-title">Goldfish Lemmar</p>
+          <p class="date">NLP Chatbot trained on lyrics ( primitive LLM ).</p>
+        </div>
+        <div class="proj-box">
+          <img class="proj-img" src="/Volumes/disk_2/program/web_prof/assets/Football_pred.png" alt="Ayush Thapa">
+          <p class="project-title">Football Prediction</p>
+          <p class="date">Spanish Football league La Liga prediction using Python using the machine learning method
+            random forest.</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>skills</h2>
+      <p>
+        <span class="badge">Python</span>
+        <span class="badge">PyTorch</span>
+        <span class="badge">SQL</span>
+        <span class="badge">NLP</span>
+        <span class="badge">SEO</span>
+      </p>
+    </section>
+
+    <footer style="margin-top: 50px; font-size: 0.8rem; color: #aaa;">
+      <p>© 2026 Ayush Thapa. Built with basic HTML/CSS.</p>
+    </footer>
+  </div>
+
+</body>
+
+</html>
