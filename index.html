@@ -302,6 +302,17 @@
       align-items: center;
       justify-content: center;
     }
+
+    /* When the screen width is 390px or less... */
+    @media (max-width: 650px) {
+      .proj-header {
+        display: flex;
+        flex-direction: column;
+        /* This is the magic: change Row to Column */
+        gap: 20px;
+        /* Adds space between the stacked items */
+      }
+    }
   </style>
 </head>
 
