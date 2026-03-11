@@ -7,6 +7,7 @@
   <title>Portfolio | Data Science & SEO</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     /* 1. BASIC STYLING (The 'Paint') */
@@ -140,9 +141,9 @@
 
 
     .header-image img {
-      width: 150px;
+      width: 160px;
       /* Set a specific size */
-      height: 150px;
+      height: 170px;
       border-radius: 15%;
       /* Makes the image a circle */
       object-fit: cover;
@@ -313,7 +314,267 @@
         /* Adds space between the stacked items */
       }
     }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      /* Keeps them aligned to the left */
+      gap: 20px;
+      margin-bottom: 25px;
+      margin-top: 25px;
+
+
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: #888;
+      /* Muted gray for non-active links */
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .main-nav a:hover {
+      color: #000;
+      /* Turns black when hovered */
+    }
+
+    /* Lofi Player Styles */
+    .lofi-section {
+      width: 100%;
+      margin: 2rem auto;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .lofi-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .lofi-header h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #171717;
+      margin: 0 0 0.25rem 0;
+      border: none;
+      padding-bottom: 0;
+    }
+
+    .lofi-subtitle {
+      color: #a3a3a3;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .player-card {
+      position: relative;
+      background: transparent;
+      border: 1px solid #f0f0f0;
+      padding: 2.5rem;
+      border-radius: 2.5rem;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .lofi-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      border-radius: 2.5rem;
+    }
+
+    .lofi-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(250, 250, 250, 0.5); /* Semi-transparent color to keep text readable */
+      /* Removed backdrop-filter: blur(8px) so the video isn't blurry */
+      z-index: 1;
+      border-radius: 2.5rem;
+    }
+
+    .lofi-track-info,
+    .lofi-controls-main,
+    .lofi-volume {
+      z-index: 2;
+    }
+
+    .lofi-track-info {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .lofi-track-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin: 0;
+      color: #171717;
+    }
+
+    .lofi-status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lofi-dot {
+      height: 0.25rem;
+      width: 0.25rem;
+      background-color: #d4d4d4;
+      border-radius: 9999px;
+      transition: all 0.3s;
+    }
+
+    .lofi-dot.playing {
+      background-color: #000;
+      transform: scale(1.5);
+    }
+
+    .lofi-status-text {
+      font-size: 0.625rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #d4d4d4;
+    }
+
+    .lofi-status-text.playing {
+      color: #000;
+    }
+
+    .lofi-controls-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .lofi-btn-secondary {
+      padding: 0.5rem;
+      color: #a3a3a3;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lofi-btn-secondary:hover {
+      color: #000;
+    }
+
+    .lofi-btn-secondary:active {
+      transform: scale(0.9);
+    }
+
+    .lofi-btn-secondary svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: currentColor;
+    }
+
+    .lofi-btn-primary {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 9999px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .lofi-btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    .lofi-btn-primary:active {
+      transform: scale(0.95);
+    }
+
+    .lofi-btn-primary svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: currentColor;
+    }
+
+    .lofi-btn-primary svg.ml-1 {
+      margin-left: 0.25rem;
+    }
+
+    .lofi-volume {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 0.5rem;
+    }
+
+    .lofi-volume svg {
+      width: 1rem;
+      height: 1rem;
+      color: #d4d4d4;
+    }
+
+    input[type='range'].lofi-slider {
+      -webkit-appearance: none;
+      background: #e5e5e5;
+      height: 2px;
+      border-radius: 2px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    input[type='range'].lofi-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      background: #000;
+      transition: transform 0.2s;
+    }
+
+    input[type='range'].lofi-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
+  <nav class="main-nav">
+    <a href="#projects">Projects</a>
+    <a href="#lofi">lofi</a>
+  </nav>
 </head>
 
 <body>
@@ -323,7 +584,7 @@
       <div class="header-text">
         <h1>Hi, I'm Ayush Thapa. 👋</h1>
 
-        <p class="exp-title2"> based in Siliguri.</p>
+        <p class="exp-title2"> based in WestBengal, India.</p>
         <p class="exp-title2"> 3rd Year <strong>Data Science Student</strong> &
           <strong>SEO Specialist</strong>
         </p>
@@ -348,7 +609,7 @@
 
       </div>
       <div class="header-image">
-        <img src="assets/image.png" alt="Ayush Thapa">
+        <img src="assets/pre-image.png" alt="Ayush Thapa">
       </div>
     </header>
 
@@ -420,11 +681,166 @@
           document.getElementById(tabName).classList.add("active");
           evt.currentTarget.classList.add("active");
         }
+
+        // 1. Tell the browser to fetch the YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var videoList = ['hGQu4_fan8Q', 'aweEWwLVFiU', 'jfKfPfyJRdk'];
+        var playlist = [
+          { title: "Path of the Ronin" },
+          { title: "Meditative Rain" },
+          { title: "Midnight Sparring" }
+        ];
+        var currentVideoIndex = Math.floor(Math.random() * videoList.length);
+        let isPlaying = false;
+
+        // 2. This function runs automatically once the API loads
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('player', {
+            height: '1',        // Invisible player (1x1 to prevent browser blocking)
+            width: '1',
+            videoId: videoList[currentVideoIndex], // Start with random video ID
+            playerVars: {
+              'autoplay': 0,    // Don't play until user clicks
+              'controls': 0,    // Hide YouTube's buttons
+              'modestbranding': 1,
+              // When opening locally as a file, window.location.origin is "null" or "file://", 
+              // which breaks the YouTube API. We use a fallback HTTP origin to bypass CORS blocks.
+              'origin': window.location.protocol === 'file:' ? 'http://localhost' : window.location.origin
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
+        function onPlayerReady(event) {
+          document.getElementById('track-title').innerText = playlist[currentVideoIndex].title;
+          const slider = document.getElementById('volume-slider');
+          if (slider) {
+            player.setVolume(slider.value);
+          }
+          if (window.lucide) {
+            lucide.createIcons();
+          }
+        }
+
+        function onPlayerStateChange(event) {
+          if (event.data == YT.PlayerState.PLAYING) {
+            isPlaying = true;
+            updateUI();
+          } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+            isPlaying = false;
+            updateUI();
+            if (event.data == YT.PlayerState.ENDED) {
+              nextLofi();
+            }
+          }
+        }
+
+        function updateUI() {
+          const trackTitle = document.getElementById('track-title');
+          if (trackTitle) {
+            trackTitle.innerText = playlist[currentVideoIndex].title;
+          }
+
+          const playIcon = document.getElementById('play-icon');
+          const statusDot = document.getElementById('status-dot');
+          const statusText = document.getElementById('status-text');
+
+          if (playIcon) {
+            if (isPlaying) {
+              playIcon.setAttribute('data-lucide', 'pause');
+              if (playIcon.classList.contains('ml-1')) playIcon.classList.remove('ml-1');
+            } else {
+              playIcon.setAttribute('data-lucide', 'play');
+              if (!playIcon.classList.contains('ml-1')) playIcon.classList.add('ml-1');
+            }
+          }
+
+          if (statusDot) {
+            if (isPlaying) {
+              statusDot.classList.add('playing');
+            } else {
+              statusDot.classList.remove('playing');
+            }
+          }
+
+          if (statusText) {
+            if (isPlaying) {
+              statusText.innerText = "Playing";
+              statusText.classList.add('playing');
+            } else {
+              statusText.innerText = "Paused";
+              statusText.classList.remove('playing');
+            }
+          }
+
+          if (window.lucide) {
+            lucide.createIcons();
+          }
+        }
+
+        // 3. Functions linked to your custom buttons
+        function togglePlay() {
+          if (isPlaying) {
+            pauseLofi();
+          } else {
+            playLofi();
+          }
+        }
+
+        function playLofi() {
+          if (player && typeof player.playVideo === 'function') {
+            player.playVideo();
+          }
+        }
+
+        function pauseLofi() {
+          if (player && typeof player.pauseVideo === 'function') {
+            player.pauseVideo();
+          }
+        }
+
+        function nextLofi() {
+          currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+          if (player && typeof player.loadVideoById === 'function') {
+            player.loadVideoById(videoList[currentVideoIndex]);
+            isPlaying = true;
+            updateUI();
+          }
+        }
+
+        function prevLofi() {
+          currentVideoIndex = (currentVideoIndex - 1 + videoList.length) % videoList.length;
+          if (player && typeof player.loadVideoById === 'function') {
+            player.loadVideoById(videoList[currentVideoIndex]);
+            isPlaying = true;
+            updateUI();
+          }
+        }
+
+        function setVolume(val) {
+          if (player && typeof player.setVolume === 'function') {
+            player.setVolume(val);
+          }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+          if (window.lucide) {
+            lucide.createIcons();
+          }
+        });
       </script>
 
     </section>
 
-    <section>
+    <section id=projects>
       <h2>projects</h2>
 
       <div class="proj-header">
@@ -460,6 +876,50 @@
         <span class="badge">NLP</span>
         <span class="badge">SEO</span>
       </p>
+    </section>
+
+
+    <section id="lofi" class="lofi-section">
+      <div class="lofi-header">
+        <h2>Enjoy Lofi</h2>
+        <p class="lofi-subtitle">Coding & Reflection Beats</p>
+      </div>
+      <div id="player"></div>
+
+      <div class="player-card">
+        <video autoplay loop muted playsinline preload="auto" class="lofi-bg-video">
+          <source src="assets/output_h264.mp4" type="video/mp4">
+        </video>
+        <div class="lofi-video-overlay"></div>
+
+        <div class="lofi-track-info">
+          <h3 id="track-title" class="lofi-track-title">Lofi Radio</h3>
+          <div class="lofi-status">
+            <div id="status-dot" class="lofi-dot"></div>
+            <span id="status-text" class="lofi-status-text">Paused</span>
+          </div>
+        </div>
+
+        <div class="lofi-controls-main">
+          <button onclick="prevLofi()" class="lofi-btn-secondary">
+            <i data-lucide="skip-back"></i>
+          </button>
+
+          <button id="play-btn" onclick="togglePlay()" class="lofi-btn-primary">
+            <i id="play-icon" data-lucide="play" class="ml-1"></i>
+          </button>
+
+          <button onclick="nextLofi()" class="lofi-btn-secondary">
+            <i data-lucide="skip-forward"></i>
+          </button>
+        </div>
+
+        <div class="lofi-volume">
+          <i data-lucide="volume-1"></i>
+          <input type="range" min="0" max="100" value="60" class="lofi-slider" id="volume-slider"
+            oninput="setVolume(this.value)">
+        </div>
+      </div>
     </section>
 
     <footer style="margin-top: 50px; font-size: 0.8rem; color: #aaa;">
