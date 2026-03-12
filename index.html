@@ -313,6 +313,19 @@
         gap: 20px;
         /* Adds space between the stacked items */
       }
+
+      .header-container {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .header-image {
+        text-align: center;
+      }
+
+      .icon-tab {
+        justify-content: center;
+      }
     }
 
     .main-nav {
@@ -569,6 +582,40 @@
         transform: translateY(0);
       }
     }
+
+    /* Falling Leaves Animation */
+    .falling-leaves {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .leaf-scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .leaf-scene div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: url('assets/Leaf-2.svg') no-repeat;
+      background-size: 100%;
+      transform-style: preserve-3d;
+      backface-visibility: visible;
+    }
   </style>
   <nav class="main-nav">
     <a href="#projects">Projects</a>
@@ -577,6 +624,7 @@
 </head>
 
 <body>
+  <div class="falling-leaves"></div>
 
   <div class="container">
     <header class="header-container">
@@ -926,6 +974,154 @@
     </footer>
   </div>
 
+  <script>
+    var LeafScene = function (el) {
+      this.viewport = el;
+      this.world = document.createElement('div');
+      this.leaves = [];
+
+      this.options = {
+        numLeaves: 10,
+        wind: {
+          magnitude: 1.2,
+          maxSpeed: 12,
+          duration: 300,
+          start: 0,
+          speed: 0
+        },
+      };
+
+      this.width = this.viewport.offsetWidth;
+      this.height = this.viewport.offsetHeight;
+
+      this.timer = 0;
+
+      this._resetLeaf = function (leaf) {
+        leaf.x = Math.random() * this.width;
+        leaf.y = -10;
+        leaf.z = Math.random() * 200;
+        if (leaf.x > this.width) {
+          leaf.x = this.width + 10;
+          leaf.y = Math.random() * this.height / 2;
+        }
+        if (this.timer == 0) {
+          leaf.y = Math.random() * this.height;
+        }
+
+        leaf.rotation.speed = Math.random() * 10;
+        var randomAxis = Math.random();
+        if (randomAxis > 0.5) {
+          leaf.rotation.axis = 'X';
+        } else if (randomAxis > 0.25) {
+          leaf.rotation.axis = 'Y';
+          leaf.rotation.x = Math.random() * 180 + 90;
+        } else {
+          leaf.rotation.axis = 'Z';
+          leaf.rotation.x = Math.random() * 360 - 180;
+          leaf.rotation.speed = Math.random() * 3;
+        }
+
+        leaf.xSpeedVariation = Math.random() * 0.8 - 0.4;
+        leaf.ySpeed = Math.random() + 1.5;
+
+        return leaf;
+      }
+
+      this._updateLeaf = function (leaf) {
+        var leafWindSpeed = this.options.wind.speed(this.timer - this.options.wind.start, leaf.y);
+
+        var xSpeed = leafWindSpeed + leaf.xSpeedVariation;
+        leaf.x += xSpeed;
+        leaf.y += leaf.ySpeed;
+        leaf.rotation.value += leaf.rotation.speed;
+
+        var t = 'translateX( ' + leaf.x + 'px ) translateY( ' + leaf.y + 'px ) translateZ( ' + leaf.z + 'px )  rotate' + leaf.rotation.axis + '( ' + leaf.rotation.value + 'deg )';
+        if (leaf.rotation.axis !== 'X') {
+          t += ' rotateX(' + leaf.rotation.x + 'deg)';
+        }
+
+        leaf.el.style.webkitTransform = t;
+        leaf.el.style.MozTransform = t;
+        leaf.el.style.msTransform = t;
+        leaf.el.style.OTransform = t;
+        leaf.el.style.transform = t;
+
+        if (leaf.x > this.width + 10 || leaf.y > this.height + 10) {
+          this._resetLeaf(leaf);
+        }
+      }
+
+      this._updateWind = function () {
+        if (this.timer === 0 || this.timer % this.options.wind.duration === 0) {
+          this.options.wind.magnitude = Math.random() * this.options.wind.maxSpeed;
+          this.options.wind.duration = this.options.wind.magnitude * 50 + (Math.random() * 20 + 20);
+          this.options.wind.start = this.timer;
+
+          var screenHeight = this.height;
+
+          this.options.wind.speed = function (t, y) {
+            var a = this.magnitude / 2 * (screenHeight - 2 * y / 3) / screenHeight;
+            return a * Math.sin(2 * Math.PI / this.duration * t + (3 * Math.PI / 2)) + a;
+          }
+        }
+      }
+    }
+
+    LeafScene.prototype.init = function () {
+      for (var i = 0; i < this.options.numLeaves; i++) {
+        var leaf = {
+          el: document.createElement('div'),
+          x: 0,
+          y: 0,
+          z: 0,
+          rotation: {
+            axis: 'X',
+            value: 0,
+            speed: 0,
+            x: 0
+          },
+          xSpeedVariation: 0,
+          ySpeed: 0,
+          path: {
+            type: 1,
+            start: 0,
+          },
+          image: 1
+        };
+        this._resetLeaf(leaf);
+        this.leaves.push(leaf);
+        this.world.appendChild(leaf.el);
+      }
+
+      this.world.className = 'leaf-scene';
+      this.viewport.appendChild(this.world);
+
+      this.world.style.webkitPerspective = "400px";
+      this.world.style.perspective = "400px";
+
+      this.timer = 0;
+    }
+
+    LeafScene.prototype.render = function () {
+      this._updateWind();
+      for (var i = 0; i < this.leaves.length; i++) {
+        this._updateLeaf(this.leaves[i]);
+      }
+
+      this.timer++;
+
+      requestAnimationFrame(this.render.bind(this));
+    }
+
+    window.addEventListener('load', function () {
+      var leafContainer = document.querySelector('.falling-leaves');
+      if (leafContainer) {
+        var leaves = new LeafScene(leafContainer);
+        leaves.init();
+        leaves.render();
+      }
+    });
+  </script>
 </body>
 
 </html>
